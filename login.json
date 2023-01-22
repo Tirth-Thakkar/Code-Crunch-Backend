@@ -1,0 +1,33 @@
+{
+    "users": [
+        {
+            "username": "JeraldLovesBlueberries",
+            "email": "100%legit@emailAddress.pizza",
+            "password": "P@$$w0rd"
+        },
+
+        {
+            "username": "EdgeLord69420",
+            "email": "EdgeLord69420@emailAddress.pizza",
+            "password": "EdgeLord69420"
+        },
+
+        {
+            "username": "JhonnoLovesCats",
+            "email": "CatsAreCool@email.com",
+            "password": "1L0v3Mr.T1bbl3$"
+        },
+
+        {
+            "username": "ShrekIsLoveShrekIsLife",
+            "email": "ShrekIsLoveShrekIsLife@emailAddress.pizza",
+            "password": "ShrekIsLoveShrekIsLife"
+        },
+
+        {
+            "username": "Hardcore_Gamer",
+            "email": "Hardcore_Gamer@emailAddress.pizza",
+            "password": "Hardcore_Gamer"
+        }
+    ]
+}
