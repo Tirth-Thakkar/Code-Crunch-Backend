@@ -1,0 +1,9 @@
+[mach-nix]
+ref = "master"
+rev = "68a85753555ed67ff53f0d0320e5ac3c725c7400"
+sha256 = "1s8z4kcb5lydcflpmw4w1crc1m8axs7z3khh972qfjjhffsi11v0"
+
+[nixpkgs]
+ref = "554d2d8aa25b6e583575459c297ec23750adb6cb"
+rev = "554d2d8aa25b6e583575459c297ec23750adb6cb"
+sha256 = "01yfqslnkyrfb5yjfablhvw830iw0za3mab4n03a0ldyq5ac6wh1"
