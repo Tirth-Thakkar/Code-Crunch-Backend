@@ -4,7 +4,7 @@ import threading
 from flask import render_template  # import render_template from "public" flask libraries
 
 # import "packages" from "this" project
-from init import app  # Definitions initialization
+from __init__ import app  # Definitions initialization
 from model.jokes import initJokes
 from model.users import initUsers
 
@@ -43,7 +43,7 @@ def activate_job():
     initUsers()
 
 # this runs the application on the development server
-if name == "main":
+if __name__ == "main":
     # change name for testing
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///volumes/sqlite.db'
     app.run(debug=True, host="0.0.0.0", port="8086")

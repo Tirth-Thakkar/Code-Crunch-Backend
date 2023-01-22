@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from model.users import User
 
-user_api = Blueprint('user_api', name)
+user_api = Blueprint('user_api', __name__)
 
 @user_api.route('/register', methods=['POST'])
 def register():
