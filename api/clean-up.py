@@ -4,8 +4,9 @@ from flask import make_response, abort
 from config import db
 from models import User, user_schema, users_schema
 
+
 # Remove: get_timestamp():
-# Remove: PEOPLE
+# Remove: USER --> not a defined variable so i put this in comments for now until i find out where it came from (EK)
 
 # ...
 
