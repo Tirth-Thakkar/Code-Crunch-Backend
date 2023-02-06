@@ -10,7 +10,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 
-class Player(db.model):
+class Player(db.Model):
     __tablename__ = 'players'
     _username = db.Column(db.String(80), unique=True, nullable=False, primary_key=True)
     _email = db.Column(db.String(120), unique=True, nullable=False)
