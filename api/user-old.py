@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
 from flask_restful import Api, Resource # used for REST API building
-from flask_restful import Api, Resource, reqparse
 from datetime import datetime
 
 from model.users import User
@@ -12,7 +11,7 @@ user_api = Blueprint('user_api', __name__,
 api = Api(user_api)
 
 class UserAPI:        
-    class _Create1(Resource):
+    class _Create(Resource):
         def post(self):
             ''' Read data for json body '''
             body = request.get_json()
@@ -54,60 +53,12 @@ class UserAPI:
             # failure returns error
             return {'message': f'Processed {name}, either a format error or User ID {uid} is duplicate'}, 210
 
-    class _Create(Resource):
-        def post(self):
-            ''' Read data for json body '''
-            body = request.get_json()
-            
-            ''' Avoid garbage in, error checking '''
-            # validate name
-            username = body.get('username')
-            if username is None or len(username) < 2:
-                return {'message': f'username is missing, or is less than 2 characters'}, 210
-            # validate email
-            email = body.get('email')
-            if email is None or len(email) < 2:
-                return {'message': f'email is missing, or is less than 2 characters'}, 210
-            # look for password and dob
-            password = body.get('password')
-
-            ''' #1: Key code block, setup USER OBJECT '''
-            uo = User(username=username, 
-                      email=email,
-                      password=password)
-            
-            
-        
-            # create user in database
-            user = uo.create()
-            # success returns json of user
-            if user:
-                return jsonify(user.read())
-            # failure returns error
-            return {'message': f'Processed {username}, either a format error or User ID {email} is duplicate'}, 210
-
     class _Read(Resource):
         def get(self):
             users = User.query.all()    # read/extract all users from database
             json_ready = [user.read() for user in users]  # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
 
-    
-    class _Delete(Resource):
-        def delete(self):
-            user= User.query.filter((User.id == id)).first()
-
-            try:
-               user= User.query.filter((User.id == id)).first()
-               if user:
-                    User.delete();
-               else:
-                return {"message": "user not found"}, 404
-            except Exception as e:
-                return {"message": f"server error: {e}"}, 500
-            
-
     # building RESTapi endpoint
     api.add_resource(_Create, '/create')
-    api.add_resource(_Delete, '/delete')
     api.add_resource(_Read, '/')
