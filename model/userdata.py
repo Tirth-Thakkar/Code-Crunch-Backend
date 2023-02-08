@@ -51,14 +51,31 @@ class Player(db.Model):
         check_pass_hash = binascii.hexlify(check_pass_hash).decode('ascii')
         return check_pass_hash == self._password[64:]
 
+    def create(self):
+        try:
+            db.session.add(self)
+            db.session.commit()
+            return self
+        except IntegrityError:
+            db.session.remove()
+            return None
+
 def newUser(self):
     
     db.create_all()
 
-    try:
-        db.session.add(self)
-        db.session.commit()
-        return self
-    except IntegrityError:
-        db.session.remove()
-        return None
+    u1 = Player("JeraldLovesBlueberries", "100%legit@emailAddress.pizza", "P@$$w0rd")
+    u2 = Player("EdgeLord69420", "EdgeLord69420@emailAddress.pizza", "EdgeLord69420")
+    u3 = Player("JhonnoLovesCats", "CatsAreCool@email.com", "1L0v3Mr.T1bbl3$")
+    u4 = Player("ShrekIsLoveShrekIsLife", "ShrekIsLoveShrekIsLife@emailAddress.pizza", "ShrekIsLoveShrekIsLife")
+    u5 = Player("Hardcore_Gamer", "Hardcore_Gamer@emailAddress.pizza", "Hardcore_Gamer")
+
+    users = [u1, u2, u3, u4, u5]
+    
+    for user in users:
+
+        try:
+            user.create()
+        except IntegrityError:
+            db.session.remove()
+            return None
