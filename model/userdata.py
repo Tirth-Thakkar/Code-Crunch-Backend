@@ -3,6 +3,7 @@ from random import randrange
 from datetime import date
 import os, base64
 import json, hashlib, binascii
+
 from __init__ import db
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -51,14 +52,11 @@ class Player(db.Model):
         check_pass_hash = binascii.hexlify(check_pass_hash).decode('ascii')
         return check_pass_hash == self._password[64:]
 
-def newUser(self):
-    
-    db.create_all()
-
-    try:
-        db.session.add(self)
-        db.session.commit()
-        return self
-    except IntegrityError:
-        db.session.remove()
-        return None
+    def new_user(self):
+        try:
+            db.session.add(self)
+            db.session.commit()
+            return self
+        except IntegrityError:
+            db.session.remove()
+            return None
