@@ -44,7 +44,7 @@ class Player(db.Model):
         hashed_password = binascii.hexlify(hashed_password)
         encrypted_pass = (salt + hashed_password).decode('ascii')
         return encrypted_pass
-
+        
     # To Check if the password is correct
     def password_validation(self, check_pass):
         salt = self._password[:64]
@@ -60,3 +60,4 @@ class Player(db.Model):
         except IntegrityError:
             db.session.remove()
             return None
+

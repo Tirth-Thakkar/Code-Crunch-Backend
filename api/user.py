@@ -54,6 +54,7 @@ class UserAPI:
             # failure returns error
             return {'message': f'Processed {name}, either a format error or User ID {uid} is duplicate'}, 210
 
+    # @cross_origin()
     class _Create(Resource):
         def post(self):
             ''' Read data for json body '''
