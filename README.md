@@ -31,7 +31,7 @@ cd flask_portfolio
 - Build nix packages from requirements.txt
 
 ```bash
-mach-nix env ./env -r requirements.txt
+
 ```
 
 - End of nix shell setup, exit shell
