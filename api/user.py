@@ -101,7 +101,7 @@ class UserAPI:
             try:
                user= User.query.filter((User.id == id)).first()
                if user:
-                    User.delete();
+                    User.delete()
                else:
                 return {"message": "user not found"}, 404
             except Exception as e:
