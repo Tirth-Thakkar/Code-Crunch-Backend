@@ -5,7 +5,7 @@ from datetime import datetime
 
 from model.users import User
 from model.leaders import Leader
-leader_api = Blueprint('user_api', __name__,
+leader_api = Blueprint('leader_api', __name__,
                    url_prefix='/api/leadersfiltered')
 
 # API docs https://flask-restful.readthedocs.io/en/latest/api.html
