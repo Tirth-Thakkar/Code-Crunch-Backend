@@ -6,9 +6,9 @@ import json
 from __init__ import app, db
 from sqlalchemy.exc import IntegrityError
 
-class Leader:
-    __tablename__ = 'leaderboard'  
-    username = db.Column(db.String(255), unique=True, nullable=False)
+class Leader(db.Model):
+    __tablename__ = 'leaderboard' 
+    username = db.Column(db.String(255), primary_key=True)
     score = db.Column(db.Integer, unique=False, nullable=False)
 
     def __init__(self, username, score):
