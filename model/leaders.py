@@ -8,7 +8,7 @@ from sqlalchemy.exc import IntegrityError
 
 class Leader(db.Model):
     __tablename__ = 'leaderboard' 
-    username = db.Column(db.String(255), primary_key=True)
+    username = db.Column(db.String(255), unique=True, primary_key=True)
     score = db.Column(db.Integer, unique=False, nullable=False)
 
     def __init__(self, username, score):
