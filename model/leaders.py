@@ -9,12 +9,12 @@ from sqlalchemy.exc import IntegrityError
 class Leader(db.Model):
     __tablename__ = 'leaderboard' 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(255))
-    score = db.Column(db.Integer, unique=False, nullable=False)
+    _username = db.Column(db.String(255))
+    _score = db.Column(db.Integer, unique=False, nullable=False)
 
     def __init__(self, username, score):
-        self.username = username
-        self.score = score
+        self._username = username
+        self._score = score
 
     @property
     def username(self):
@@ -93,3 +93,4 @@ def initLeaders():
                 db.session.remove()
                 print(f"Records exist, duplicate email, or error: {leader.username}")
                 
+        db.session.close()
