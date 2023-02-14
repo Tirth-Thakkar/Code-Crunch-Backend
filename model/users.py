@@ -128,20 +128,25 @@ def initUsers():
         """Create database and tables"""
         db.init_app(app)
         db.create_all()
+
         """Tester data for table"""
+
         u1 = User(username='sreeja', email="sreeja@gmail.com", password='123sreeja')
         u2 = User(username='ekam', email="ekam@gmail.com", password='123ekam')
         u3 = User(username='tirth', email="tirth@gmail.com", password='123tirth')
         u4 = User(username='mani', email="mani@gmail.com", password='123mani')
         u5 = User(username='user', email="user@gmail.com", password='123user')
+
         users = [u1, u2, u3, u4, u5]
 
         """Builds sample user/note(s) data"""
         for user in users:
             try:
                 user.create()
+                
             except IntegrityError:
                 '''fails with bad or duplicate data'''
+
                 db.session.remove()
                 print(f"Records exist, duplicate email, or error: {user.username}")
                 

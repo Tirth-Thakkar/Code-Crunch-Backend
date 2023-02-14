@@ -101,14 +101,14 @@ class Profile(db.Model):
         db.session.commit()
         return None
     
-    def initProfile(self):
+    def initProfiles(self):
         with app.app_context():
             db.create_all()
             db.session.commit()
             db.session.remove()
             return None
         
-def initProfile():
+def initProfiles():
     with app.app_context():
         """Create database and tables"""
         db.init_app(app)
