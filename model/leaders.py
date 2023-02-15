@@ -9,12 +9,12 @@ from sqlalchemy.exc import IntegrityError
 class Leader(db.Model):
     __tablename__ = 'leaderboard' 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(255))
-    score = db.Column(db.Integer, unique=False, nullable=False)
+    _username = db.Column(db.String(255))
+    _score = db.Column(db.Integer, unique=False, nullable=False)
 
     def __init__(self, username, score):
-        self.username = username
-        self.score = score
+        self._username = username
+        self._score = score
 
     @property
     def username(self):
@@ -39,15 +39,14 @@ class Leader(db.Model):
     # CRUD create/add a new record to the table
     # returns self or None on error
     def create(self):
-        with app.app_context():
-            try:
-                # creates a person object from User(db.Model) class, passes initializers
-                db.session.add(self)  # add prepares to persist person object to Users table
-                db.session.commit()  # SqlAlchemy "unit of work pattern" requires a manual commit
-                return self
-            except IntegrityError:
-                db.session.remove()
-                return None
+        try:
+            # creates a person object from User(db.Model) class, passes initializers
+            db.session.add(self)  # add prepares to persist person object to Users table
+            db.session.commit()  # SqlAlchemy "unit of work pattern" requires a manual commit
+            return self
+        except IntegrityError:
+            db.session.remove()
+            return None
 
     def read(self):
         return {'username': self.username, 'score': self.score}
@@ -64,12 +63,6 @@ class Leader(db.Model):
         db.session.commit()
         return None
 
-    def initLeaders(self):
-        with app.app_context():
-            db.create_all()
-            db.session.commit()
-            db.session.remove()
-            return None
 def initLeaders():
     with app.app_context():
         """Create database and tables"""
@@ -93,3 +86,4 @@ def initLeaders():
                 db.session.remove()
                 print(f"Records exist, duplicate email, or error: {leader.username}")
                 
+        
