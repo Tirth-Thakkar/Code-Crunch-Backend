@@ -86,4 +86,4 @@ def initLeaders():
                 db.session.remove()
                 print(f"Records exist, duplicate email, or error: {leader.username}")
                 
-        db.session.close()
+        
