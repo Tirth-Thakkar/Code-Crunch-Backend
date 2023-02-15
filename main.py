@@ -24,7 +24,14 @@ app.register_blueprint(joke_api) # register api routes
 app.register_blueprint(covid_api) # register api routes
 app.register_blueprint(user_api) # register api routes
 app.register_blueprint(leader_api) # register api routes
+<<<<<<< Updated upstream
 app.register_blueprint(profile_api)
+=======
+<<<<<<< Updated upstream
+=======
+app.register_blueprint(profile_api) # register app routes
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 app.register_blueprint(app_projects) # register app pages
 
 @app.errorhandler(404)  # catch for URL not found
