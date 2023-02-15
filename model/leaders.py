@@ -66,8 +66,8 @@ class Leader(db.Model):
 def initLeaders():
     with app.app_context():
         """Create database and tables"""
-        db.init_app(app)
-        db.create_all()
+        # db.init_app(app)
+        # db.create_all()
         """Tester data for table"""
         leader1 = Leader(username='sreeja', score=5)
         leader2 = Leader(username='ekam', score=4)

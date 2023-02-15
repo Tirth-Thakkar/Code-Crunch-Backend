@@ -24,14 +24,7 @@ app.register_blueprint(joke_api) # register api routes
 app.register_blueprint(covid_api) # register api routes
 app.register_blueprint(user_api) # register api routes
 app.register_blueprint(leader_api) # register api routes
-<<<<<<< Updated upstream
-app.register_blueprint(profile_api)
-=======
-<<<<<<< Updated upstream
-=======
-app.register_blueprint(profile_api) # register app routes
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+app.register_blueprint(profile_api) # register api routes
 app.register_blueprint(app_projects) # register app pages
 
 @app.errorhandler(404)  # catch for URL not found
@@ -49,6 +42,10 @@ def stub():
 
 @app.before_first_request
 def activate_job():
+    with app.app_context():
+        """Create database and tables"""
+        db.init_app(app)
+        db.create_all()
     initJokes()
     initUsers()
     initLeaders()
