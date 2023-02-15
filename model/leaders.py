@@ -63,12 +63,6 @@ class Leader(db.Model):
         db.session.commit()
         return None
 
-    def initLeaders(self):
-        with app.app_context():
-            db.create_all()
-            db.session.commit()
-            db.session.remove()
-            return None
 def initLeaders():
     with app.app_context():
         """Create database and tables"""
