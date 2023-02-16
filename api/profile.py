@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from flask_restful import Api, Resource # used for REST API building
+from flask_restful import Api, Resource #used for REST API building
 from flask_restful import Api, Resource, reqparse
 from datetime import datetime
 
@@ -37,20 +37,20 @@ class ProfilesAPI:
             
             ''' #1: Key code block, setup USER OBJECT '''
             profile = Profile(username=username, email=email, high_score=high_score, starred_games=starred_games, points_per_second=points_per_second)
-            # create user in database
+            #create user in database
             user = profile.create()
-            # success returns json of user
+            #success returns json of user
             if user:
                 return jsonify(user.read())
-            # failure returns error
+            #failure returns error
             return {'message': f'Either your username {username}, email {email}, high score {high_score}, starred games {starred_games}, or points per second {points_per_second} is problematic or less than zero.'}, 210
         
     class _Retrieve(Resource):
         def get(self):
-            profiles = Profile.query.all()    # read/extract all users from database
-            json_ready = [profile.read() for profile in profiles]  # prepare output in json
-            return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
+            profiles = Profile.query.all()    #read/extract all users from database
+            json_ready = [profile.read() for profile in profiles]  #prepare output in json
+            return jsonify(json_ready)  #jsonify creates Flask response object, more specific to APIs than json.dumps
         
-            # building RESTapi endpoint
+            #building RESTapi endpoint
     api.add_resource(_High_Score, '/high_score')
     api.add_resource(_Retrieve, '/retrieve')
