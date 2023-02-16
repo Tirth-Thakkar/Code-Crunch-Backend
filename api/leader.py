@@ -38,7 +38,7 @@ class LeadersAPI:
 
     class _Retrieve(Resource):
         def get(self):
-            leaders = Leader.query.all()    # read/extract all users from database
+            leaders = Leader.query.order_by(Leader._score.desc()).all()   # read/extract all users from database
             json_ready = [leader.read() for leader in leaders]  # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
             
