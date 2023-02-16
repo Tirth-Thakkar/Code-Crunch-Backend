@@ -6,6 +6,10 @@ services:
                 ports:
                         - "4269:8086"
                 volumes:
-                        - ./volumes:/volumes
-                        - ./instance:/instance
+                #Local:
+                        # - ./volumes:/volumes
+                        # - ./instance:/instance
+                # AWS:
+                        - /home/ubuntu/Code-Crunch/Code-Crunch-Backend/volumes:/volumes
+                        - /home/ubuntu/Code-Crunch/Code-Crunch-Backend/instance:/instance
                 restart: unless-stopped
