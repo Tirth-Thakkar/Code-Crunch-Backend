@@ -46,13 +46,11 @@ class LeadersAPI:
         def post(self):
             body = request.get_json()
             username = body.get('username')
-
-            # Retrieve user by username
-            # Retrieve top 10 leaderboard entries, ordered by score
-            userleads = Leader.query.order_by(Leader._score.desc()).limit(10).all()
+            userleads = Leader.query.order_by(Leader._score.desc()).all()
             # Filter leaderboard entries to only include scores for desired user
             user_scores = [{'username': leader.username, 'score': leader.score} for leader in userleads if leader.username == username]
-
+            if not user_scores:
+                return {'message': f'No scores found for user {username}'}, 404
             return jsonify(user_scores)
 
             
