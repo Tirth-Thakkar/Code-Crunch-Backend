@@ -4,7 +4,7 @@ services:
                 image: codecrunch_port_v1
                 build: .
                 ports:
-                        - "4269:8086"
+                        - "8015:8086"
                 volumes:
                 #Local:
                         # - ./volumes:/volumes
