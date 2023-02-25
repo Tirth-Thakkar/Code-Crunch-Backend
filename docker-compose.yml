@@ -1,15 +1,11 @@
 version: '3'
 services:
         web:
-                image: codecrunch_port_v1
+                image: crunch_v1 
                 build: .
                 ports:
-                        - "8015:8086"
+                        - "8016:8080" 
                 volumes:
-                #Local:
-                        # - ./volumes:/volumes
-                        # - ./instance:/instance
-                # AWS:
-                        - /home/ubuntu/Code-Crunch/Code-Crunch-Backend/volumes:/volumes
-                        - /home/ubuntu/Code-Crunch/Code-Crunch-Backend/instance:/instance
+                        - ./volumes:/volumes
+                        - ./instance:/instance
                 restart: unless-stopped
