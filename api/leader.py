@@ -38,11 +38,26 @@ class LeadersAPI:
 
     class _Retrieve(Resource):
         def get(self):
-            leaders = Leader.query.order_by(Leader._score.desc()).all()   # read/extract all users from database
+            leaders = Leader.query.order_by(Leader._score.desc()).limit(10).all()   # read/extract all users from database
             json_ready = [leader.read() for leader in leaders]  # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
+            
+    class _GetUserScoresFiltered(Resource):
+        def post(self):
+            body = request.get_json()
+            username = body.get('username')
+
+            # Retrieve user by username
+            # Retrieve top 10 leaderboard entries, ordered by score
+            userleads = Leader.query.order_by(Leader._score.desc()).limit(10).all()
+            # Filter leaderboard entries to only include scores for desired user
+            user_scores = [{'username': leader.username, 'score': leader.score} for leader in userleads if leader.username == username]
+
+            return jsonify(user_scores)
+
             
     # building RESTapi endpoint
     api.add_resource(_Score, '/score')
     api.add_resource(_Retrieve, '/retrieve')
+    api.add_resource(_GetUserScoresFiltered, '/getuserscoresfiltered')
     
