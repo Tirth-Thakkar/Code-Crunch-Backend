@@ -111,7 +111,6 @@ class Profile(db.Model):
 def initProfiles():
     with app.app_context():
         """Create database and tables"""
-        db.init_app(app)
         db.create_all()
         """Tester data for table"""
         profile1 = Profile(username='sreeja', email = "sreeja@gmail.com", high_score=5, starred_games = 5, points_per_second = 3)
