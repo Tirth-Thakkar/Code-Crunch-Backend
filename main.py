@@ -42,15 +42,19 @@ def stub():
 
 @app.before_first_request
 def activate_job():
+    print("activating file")
     db.init_app(app)
     initJokes()
     initUsers()
     initLeaders()
     initProfiles()
 
+activate_job()
+
 # this runs the application on the development server
 if __name__ == "__main__":
     # change name for testing
+    print("making server")
     from flask_cors import CORS
     cors = CORS(app)
     app.run(debug=True, host="0.0.0.0", port="8086")
