@@ -9,7 +9,7 @@ class Profile(db.Model):
     _username = db.Column(db.String(80), unique=True, nullable=False, primary_key=True)
     _email = db.Column(db.String(120), unique=True, nullable=False)
     _high_score = db.Column(db.Integer, unique=False, nullable=False)
-    _starred_games = db.Column(db.Integer, unique=True, nullable=False)
+    _starred_games = db.Column(db.Integer, unique=False, nullable=False)
     _points_per_second = db.Column(db.Integer, unique=False, nullable=False)
 
     def __init__(self, username, email, high_score, starred_games, points_per_second):
@@ -42,13 +42,13 @@ class Profile(db.Model):
 
     #high high_score getter and setter functions
     @property
-    def high_high_score(self):
-        return self._high_high_score
+    def high_score(self):
+        return self._high_score
 
-    @high_high_score.setter
-    def high_high_score(self, high_high_score):
-        if high_high_score > self._high_high_score:
-            self._high_high_score = high_high_score
+    @high_score.setter
+    def high_score(self, high_score):
+        if high_score > self._high_score:
+            self._high_score = high_score
 
     #starred games getter and setter functions
     #not yet sure how this data will be stored, but I'm creating the getter and setter of some string called _starred_games now
@@ -85,13 +85,13 @@ class Profile(db.Model):
             return None
 
     def read(self):
-        return {'username': self._username, 'email': self._email, 'high_high_score': self._high_high_score, 'points_per_second': self._points_per_second}
+        return {'username': self._username, 'email': self._email, 'high_score': self._high_score, 'starred_games': self._starred_games,'points_per_second': self._points_per_second, }
 
-    def update(self, username, email, high_high_score, starred_games, points_per_second):
+    def update(self, username, email, high_score, starred_games, points_per_second):
         self._username = username
         self._email = email
-        if high_high_score > self._high_high_score:
-            self._high_high_score = high_high_score
+        if high_score > self._high_score:
+            self._high_score = high_score
         self._starred_games = starred_games
         self._points_per_second = points_per_second
         return self
