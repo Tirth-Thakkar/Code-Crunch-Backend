@@ -12,12 +12,12 @@ class Highscore(db.Model):
     __tablename__ = 'highscores'
     id = db.Column(db.Integer, primary_key=True)
     _username = db.Column(db.String(255))
-    _score = db.Column(db.Integer, unique=False, nullable=False)
+    _hscore = db.Column(db.Integer, unique=False, nullable=False)
 
 
-    def __init__(self, username, score):
+    def __init__(self, username, hscore):
         self._username = username
-        self._score = score
+        self._hscore = hscore
 
 
     @property
@@ -29,13 +29,13 @@ class Highscore(db.Model):
         self._username = username
    
     @property
-    def score(self):
-        return self._score
+    def hscore(self):
+        return self._hscore
 
 
-    @score.setter
-    def score(self, score):
-        self._score = score
+    @hscore.setter
+    def hscore(self, hscore):
+        self._hscore = hscore
 
 
     def __str__(self):
@@ -53,14 +53,14 @@ class Highscore(db.Model):
 
 
     def read(self):
-        return {'username': self.username, 'score': self.score}
+        return {'username': self.username, 'hscore': self.hscore}
 
 
-    def update(self, username, score):
+    def update(self, username, hscore):
         if username != "null" and username != None:
             self.username = username
-        if score >= 0:
-            self.score = score
+        if hscore >= 0:
+            self.hscore = hscore
         return self
 
 
@@ -75,11 +75,11 @@ def initHighscores():
         db.init_app(app)
         db.create_all()
         """Tester data for table"""
-        highscore1 = Highscore(username='sreeja', score=7)
-        highscore2 = Highscore(username='ekam', score=7)
-        highscore3 = Highscore(username='tirth', score=7)
-        highscore4 = Highscore(username='mani', score=7)
-        highscore5 = Highscore(username='user', score=7)
+        highscore1 = Highscore(username='sreeja', hscore=7)
+        highscore2 = Highscore(username='ekam', hscore=7)
+        highscore3 = Highscore(username='tirth', hscore=7)
+        highscore4 = Highscore(username='mani', hscore=7)
+        highscore5 = Highscore(username='user', hscore=7)
         highscores = [highscore1, highscore2, highscore3, highscore4, highscore5]
 
 
