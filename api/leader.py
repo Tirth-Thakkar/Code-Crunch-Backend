@@ -75,4 +75,4 @@ class LeadersAPI:
     api.add_resource(_Score, '/score')
     api.add_resource(_Retrieve, '/retrieve')
     api.add_resource(_GetUserScoresFiltered, '/getuserscoresfiltered')
-    api.add_resource(_LeaderCompare, '/leadercompare')
+    # api.add_resource(_LeaderCompare, '/leadercompare')
