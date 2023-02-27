@@ -1,12 +1,12 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, abort, Flask
 from flask_restful import Api, Resource #used for REST API building
 from flask_restful import Api, Resource
-
 from model.users import User
 from model.profiles import Profile
 profile_api = Blueprint('profile_api', __name__,
                    url_prefix='/api/profilesfiltered')
 
+app = Flask(__name__)
 api = Api(profile_api)
 
 class ProfilesAPI:       
@@ -49,6 +49,16 @@ class ProfilesAPI:
             profiles = Profile.query.all()    #read/extract all users from database
             json_ready = [profile.read() for profile in profiles]  #prepare output in json
             return jsonify(json_ready)  #jsonify creates Flask response object, more specific to APIs than json.dumps
+        
+    # @app.route('/getpps/<int:id>', methods=['GET'])
+    # def getpointspersecond(id):
+    #     profiles = Profile.query.all()    #read/extract all users from database
+    #     json_ready = [profile.read() for profile in profiles]  #prepare output in json
+    #     pps = json_ready.get(id)
+    #     if pps:
+    #         return jsonify({'points_per_second': json_ready.getpointsperscond()})
+    #     else:
+    #         abort(404, 'Error - Bad ID')
         
             #building RESTapi endpoint
     api.add_resource(_Profile, '/profile')

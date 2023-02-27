@@ -1,5 +1,6 @@
 from __init__ import app, db
 from sqlalchemy.exc import IntegrityError
+from flask import request, jsonify
 
 class Profile(db.Model):
     __tablename__ = 'profiles'
@@ -70,6 +71,7 @@ class Profile(db.Model):
 
     
 
+
       #CRUD create/add a new record to the table
       #returns self or None on error
     def create(self):
@@ -126,3 +128,14 @@ def initProfiles():
                 '''fails with bad or duplicate data'''
                 db.session.remove()
                 print(f"Records exist, duplicate email, or error: {profile.username}")
+
+        # @app.route("/api/profilesfiltered/retrieve/{username}")
+        # def data():
+        #     username = "sreeja"
+        #     request.args.get('username')
+        #     for profile in profiles:
+        #         if username == profile['username']:
+        #             response = {
+        #                 "email": profile['email']
+        #             }
+        #             return jsonify(response)
