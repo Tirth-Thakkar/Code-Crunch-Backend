@@ -10,7 +10,7 @@ highscore_api = Blueprint('highscore_api', __name__,
 
 api = Api(highscore_api)
 
-class HighscoreAPI:
+class HighscoresAPI:
     class _Highscore(Resource):
         def post(self):
             ''' Read data for json body '''
@@ -53,10 +53,11 @@ class HighscoreAPI:
                     break
 
                 if highscore.username not in highscore_dict:
-                    highscore_dict[highscore.username] = highscore.score
-                    user_hscores.append({'username': highscore.username, 'score': highscore.hscore})
+                    highscore_dict[highscore.username] = highscore.hscore
+                    user_hscores.append({'username': highscore.username, 'hscore': highscore.hscore})
 
             return jsonify(user_hscores)
+
 
 api.add_resource(_Highscore, '/hscore')
 api.add_resource(_Retrieve, '/retrieve')
