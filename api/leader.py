@@ -18,7 +18,7 @@ class LeadersAPI:
             body = request.get_json()
             username = body.get('username')
             score = body.get('score')
-            user = User.query.filter((User.username == username)).first
+            user = User.query.filter((User._username == username)).first
             if username == 'null':
                 return {'message': f'error no login'}, 210
             if user is False:
@@ -46,18 +46,33 @@ class LeadersAPI:
         def post(self):
             body = request.get_json()
             username = body.get('username')
-
-            # Retrieve user by username
-            # Retrieve top 10 leaderboard entries, ordered by score
-            userleads = Leader.query.order_by(Leader._score.desc()).limit(10).all()
+            userleads = Leader.query.order_by(Leader._score.desc()).all()
             # Filter leaderboard entries to only include scores for desired user
-            user_scores = [{'username': leader.username, 'score': leader.score} for leader in userleads if leader.username == username]
-
+            user_scores = [leader.read() for leader in userleads if leader.username == username]
+            if not user_scores:
+                return {'message': f'No scores found for user {username}'}, 210
             return jsonify(user_scores)
+    
+    # class _LeaderCompare(Resource):
+    #     def post(self):
+    #         body = request.get_json()
+    #         username1 = body.get('username1')
+    #         username2 = body.get('username2')
+    #         userleads = Leader.query.order_by(Leader._score.desc()).all()
+    #         user_scores1 = [leader.read() for leader in userleads if leader.username == username1]
+    #         user_scores2 = [leader.read() for leader in userleads if leader.username == username2]
+            
+    #         if not user_scores1:
+    #             return {'message': f'No scores found for user {username1}'}, 210
+    #         if not user_scores2:
+    #             return {'message': f'No scores found for user {username2}'}, 210
+                
+        
+            
 
             
     # building RESTapi endpoint
     api.add_resource(_Score, '/score')
     api.add_resource(_Retrieve, '/retrieve')
     api.add_resource(_GetUserScoresFiltered, '/getuserscoresfiltered')
-    
+    # api.add_resource(_LeaderCompare, '/leadercompare')
