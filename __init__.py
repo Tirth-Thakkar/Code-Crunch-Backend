@@ -15,7 +15,7 @@ app = Flask(__name__)
 # CORS(app)
 # Setup SQLAlchemy object and properties for the database (db)
 # basedir = os.path.abspath(os.path.dirname(__file__))
-# dbURI = 'sqlite:///' + os.path.join(basedir, 'sqlite.db')
+## dbURI = 'sqlite:///' + os.path.join(basedir, '/volumes/sqlite.db')
 dbURI = 'sqlite:///volumes/sqlite.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = dbURI
