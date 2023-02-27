@@ -1,13 +1,11 @@
-from datetime import date
-import os, base64
-import json, hashlib, binascii
 from __init__ import app, db
 from sqlalchemy.exc import IntegrityError
 
 class Profile(db.Model):
     __tablename__ = 'profiles'
-    _username = db.Column(db.String(80), unique=True, nullable=False, primary_key=True)
-    _email = db.Column(db.String(120), unique=True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    _username = db.Column(db.String(80), unique=True, nullable=False)
+    _email = db.Column(db.String(120), unique=False, nullable=False)
     _high_score = db.Column(db.Integer, unique=False, nullable=False)
     _starred_games = db.Column(db.Integer, unique=False, nullable=False)
     _points_per_second = db.Column(db.Integer, unique=False, nullable=False)

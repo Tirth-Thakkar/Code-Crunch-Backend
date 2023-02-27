@@ -1,7 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_restful import Api, Resource #used for REST API building
-from flask_restful import Api, Resource, reqparse
-from datetime import datetime
+from flask_restful import Api, Resource
 
 from model.users import User
 from model.profiles import Profile
@@ -36,14 +35,14 @@ class ProfilesAPI:
                 return {'message': f'error no points per second'}
             
             ''' #1: Key code block, setup USER OBJECT '''
-            profile = Profile(username=username, email=email, high_score=high_score, starred_games=starred_games, points_per_second=points_per_second)
+            profile = Profile(username=username, email=email, high_score=int(high_score), starred_games=int(starred_games), points_per_second=int(points_per_second))
             #create user in database
             user = profile.create()
             #success returns json of user
             if user:
                 return jsonify(user.read())
-            #failure returns error
-            return {'message': "integrity"}, 210
+            else:
+                return {'message': "integrity"}, 210
             # f'Either your username {username}, email {email}, high score {high_score}, starred games {starred_games}, or points per second {points_per_second} is problematic or less than zero.'
     class _Retrieve(Resource):
         def get(self):
