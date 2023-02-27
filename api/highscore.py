@@ -31,11 +31,13 @@ class HighscoresAPI:
             if user:
                 return jsonify(user.read())
             return {'message': f'Processed {username}, either a format error or score {hscore} is negative or zero'}, 210
+    
     class _Retrieve(Resource):
         def get(self):
             highscores = Highscore.query.order_by(Highscore._hscore.desc()).limit(10).all() 
             json_ready = [highscore.read() for highscore in highscores] 
             return jsonify(json_ready)  
+    
     class _GetUserHighestScores(Resource):
         def post(self):
             body = request.get_json()
@@ -59,6 +61,6 @@ class HighscoresAPI:
             return jsonify(user_hscores)
 
 
-api.add_resource(_Highscore, '/hscore')
-api.add_resource(_Retrieve, '/retrieve')
-api.add_resource(_GetUserHighestScores, '/getuserhighestscores')
+    api.add_resource(_Highscore, '/hscore')
+    api.add_resource(_Retrieve, '/retrieve')
+    api.add_resource(_GetUserHighestScores, '/getuserhighestscores')
