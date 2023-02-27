@@ -18,6 +18,7 @@ from api.user import user_api # Blueprint import api definition
 from api.leader import leader_api # Blueprint import api definition
 from api.profile import profile_api # Blueprint import api definition
 from api.highscore import highscore_api # Blueprint import api definition
+from api.lastscore import score_api
 # setup App pages
 from projects.projects import app_projects # Blueprint directory import projects definition
 
