@@ -38,7 +38,7 @@ class LeadersAPI:
 
     class _Retrieve(Resource):
         def get(self):
-            leaders = Leader.query.order_by(Leader._score.desc()).limit(10).all()   # read/extract all users from database
+            leaders = Leader.query.order_by(Leader._score.desc()).all()   # read/extract all users from database
             json_ready = [leader.read() for leader in leaders]  # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
             
@@ -52,6 +52,20 @@ class LeadersAPI:
             if not user_scores:
                 return {'message': f'No scores found for user {username}'}, 210
             return jsonify(user_scores)
+    
+    class _Delete(Resource):
+        def delete(self):
+            user= Leader.query.filter((Leader.id == id)).first()
+
+            try:
+               user= Leader.query.filter((Leader.id == id)).first()
+               if user:
+                    Leader.delete()
+               else:
+                return {"message": "user not found"}, 404
+            except Exception as e:
+                return {"message": f"server error: {e}"}, 500
+    
     
     # class _LeaderCompare(Resource):
     #     def post(self):
