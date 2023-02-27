@@ -11,13 +11,13 @@ highscore_api = Blueprint('highscore_api', __name__,
 api = Api(highscore_api)
 
 class HighscoresAPI:
-    class _Highscore(Resource):
+    class _Hscore(Resource):
         def post(self):
             ''' Read data for json body '''
             body = request.get_json()
             username = body.get('username')
             hscore = body.get('hscore')
-            user = User.query.filter((User.username == username)).first
+            user = User.query.filter((User._username == username)).first
             if username == 'null':
                 return {'message': f'error no login'}, 210
             if user is False:
@@ -30,11 +30,11 @@ class HighscoresAPI:
             user = highscore.create()
             if user:
                 return jsonify(user.read())
-            return {'message': f'Processed {username}, either a format error or score {hscore} is negative or zero'}, 210
+            return {'message': f'Processed {username}, either a format error or hscore {hscore} is negative or zero'}, 210
     
     class _Retrieve(Resource):
         def get(self):
-            highscores = Highscore.query.order_by(Highscore._hscore.desc()).limit(10).all() 
+            highscores = Highscore.query.order_by(Highscore._hscore.desc()).all()
             json_ready = [highscore.read() for highscore in highscores] 
             return jsonify(json_ready)  
     
@@ -61,6 +61,6 @@ class HighscoresAPI:
             return jsonify(user_hscores)
 
 
-    api.add_resource(_Highscore, '/hscore')
+    api.add_resource(_Hscore, '/hscore')
     api.add_resource(_Retrieve, '/retrieve')
     api.add_resource(_GetUserHighestScores, '/getuserhighestscores')
