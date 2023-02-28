@@ -10,7 +10,7 @@ app = Flask(__name__)
 api = Api(profile_api)
 
 class ProfilesAPI:       
-    class _Profile(Resource):
+    class _Update(Resource):
         def post(self):
             ''' Read data for json body '''
             body = request.get_json()
@@ -44,22 +44,11 @@ class ProfilesAPI:
             else:
                 return {'message': "integrity"}, 210
             # f'Either your username {username}, email {email}, high score {high_score}, starred games {starred_games}, or points per second {points_per_second} is problematic or less than zero.'
-    class _Retrieve(Resource):
+    class _Read(Resource):
         def get(self):
             profiles = Profile.query.all()    #read/extract all users from database
             json_ready = [profile.read() for profile in profiles]  #prepare output in json
             return jsonify(json_ready)  #jsonify creates Flask response object, more specific to APIs than json.dumps
-        
-    # @app.route('/getpps/<int:id>', methods=['GET'])
-    # def getpointspersecond(id):
-    #     profiles = Profile.query.all()    #read/extract all users from database
-    #     json_ready = [profile.read() for profile in profiles]  #prepare output in json
-    #     pps = json_ready.get(id)
-    #     if pps:
-    #         return jsonify({'points_per_second': json_ready.getpointsperscond()})
-    #     else:
-    #         abort(404, 'Error - Bad ID')
-        
-            #building RESTapi endpoint
-    api.add_resource(_Profile, '/profile')
-    api.add_resource(_Retrieve, '/retrieve')
+                    
+    api.add_resource(_Update, '/update')
+    api.add_resource(_Read, '/read')
