@@ -18,7 +18,7 @@ from api.user import user_api # Blueprint import api definition
 from api.leader import leader_api # Blueprint import api definition
 from api.profile import profile_api # Blueprint import api definition
 # from api.highscore import highscore_api # Blueprint import api definition
-from api.lastscore import score_api
+# from api.lastscore import score_api
 # setup App pages
 from projects.projects import app_projects # Blueprint directory import projects definition
 
@@ -30,7 +30,7 @@ app.register_blueprint(leader_api) # register api routes
 app.register_blueprint(profile_api) # register api routes
 # app.register_blueprint(highscore_api) # register api routes
 app.register_blueprint(app_projects) # register app pages
-app.register_blueprint(score_api)
+# app.register_blueprint(score_api)
 
 @app.errorhandler(404)  # catch for URL not found
 def page_not_found(e):
@@ -47,7 +47,7 @@ def stub():
 
 @app.before_first_request
 def activate_job():
-    print("activating file")
+    # print("activating file")
     # db.init_app(app)
     initJokes()
     initUsers()
@@ -55,7 +55,7 @@ def activate_job():
     initProfiles()
     # initHighscores()
 
-activate_job()
+# activate_job()
 # this runs the application on the development server
 if __name__ == "__main__":
     # change name for testing
