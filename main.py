@@ -48,7 +48,7 @@ def stub():
 @app.before_first_request
 def activate_job():
     print("activating file")
-    db.init_app(app)
+    # db.init_app(app)
     initJokes()
     initUsers()
     initLeaders()
