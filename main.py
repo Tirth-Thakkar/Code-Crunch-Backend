@@ -1,5 +1,6 @@
 import threading
 
+
 # import "packages" from flask
 from flask import render_template  # import render_template from "public" flask libraries
 
@@ -56,6 +57,9 @@ def activate_job():
     initProfiles()
     initScores()
     # initHighscores()
+
+from flask_cors import CORS
+cors = CORS(app)
 
 # activate_job()
 # this runs the application on the development server
