@@ -5,13 +5,13 @@ import json
 
 from __init__ import app, db
 from sqlalchemy.exc import IntegrityError
-
+##from sqlalchemy import update
 
 class Scores(db.Model):
     __tablename__ = 'score' 
    
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    _username = db.Column(db.String(255))
+    id = db.Column(db.Integer, primary_key=True)
+    _username = db.Column(db.String(255), unique=True)
     _score1 = db.Column(db.Integer, unique=False, nullable=False)
     _score2 = db.Column(db.Integer, unique=False, nullable=False)
     _score3 = db.Column(db.Integer, unique=False, nullable=False)
@@ -20,15 +20,15 @@ class Scores(db.Model):
     _score6 = db.Column(db.Integer, unique=False, nullable=False)
 
     # constructor of a Score object, initializes the instance variables within object (self)
-    def __init__(self, username, score1, score2, score3, score4, score5, score6):
+    def __init__(self, username, score):
         self._username = username
-        self._score1 = score1
-        self._score2 = score2
-        self._score3 = score3
-        self._score4 = score4
-        self._score5 = score5
-        self._score6 = score6
-
+        self._score6 = 0
+        self._score5 = 0
+        self._score4 = 0
+        self._score3 = 0
+        self._score2 = 0 
+        self._score1 = score
+ 
     @property
     def username(self):
         return self._username 
@@ -117,32 +117,42 @@ class Scores(db.Model):
 #CRUD --> read 
     def read(self):
         return {
-            "username": self._username, 
-            "score1": self._score1, 
-            "score2": self._score2, 
-            "score3": self._score3, 
-            "score4": self._score4, 
-            "score5": self._score5, 
-            "score6": self._score6
+            "username": self.username, 
+            "score1": self.score1, 
+            "score2": self.score2, 
+            "score3": self.score3, 
+            "score4": self.score4, 
+            "score5": self.score5, 
+            "score6": self.score6
             }
 
 #CRUD --> update
-    def update(self, _username, score):
-        self._score1 = score
-        self._score2 = self._score1
-        self._score3 = self._score2
-        self._score4 = self._score3 
-        self._score5 = self._score4
-        self._score6 = self._score5
+    def update(self, username, score):
+        self.username = username
+        self.score6 = self.score5
+        self.score5 = self.score4
+        self.score4 = self.score3
+        self.score3 = self.score2
+        self.score2 = self.score1
+        self.score1 = score
+        return self
+        # upd = update(score)
+        # val = upd.values({"score1":_score})
+        # cond = val.where(score.c.username == self.username)
 
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        return None
+    
 def initScores():
     with app.app_context():
         """Create database and tables"""
         db.create_all()
         """Tester data for table"""
-        row1 = Scores(username='sreeja', score1=0, score2=0, score3=0, score4=0, score5=0, score6=0)
-        row2 = Scores(username='ekam', score1=0, score2=0, score3=0, score4=0, score5=0, score6=0)
-        row3 = Scores(username='tirth', score1=0, score2=0, score3=0, score4=0, score5=0, score6=0)
+        row1 = Scores(username='sreeja', score=0)
+        row2 = Scores(username='ekam', score=0)
+        row3 = Scores(username='tirth', score=0)
         rows = [row1, row2, row3]
 
         """Builds sample user/note(s) data"""

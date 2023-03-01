@@ -9,6 +9,7 @@ from model.jokes import initJokes
 from model.users import initUsers
 from model.leaders import initLeaders
 from model.profiles import initProfiles
+from model.scores import initScores
 # from model.highscores import initHighscores
 
 # setup APIs
@@ -53,6 +54,7 @@ def activate_job():
     initUsers()
     initLeaders()
     initProfiles()
+    initScores()
 #    initHighscores()
 
 activate_job()
