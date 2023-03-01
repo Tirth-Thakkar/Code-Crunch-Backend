@@ -3,7 +3,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
-# from flask_cors import CORS
+from flask_cors import CORS
 """
 These object can be used throughout project.
 1.) Objects from this file can be included in many blueprints
@@ -12,7 +12,7 @@ These object can be used throughout project.
 
 # Setup of key Flask object (app)
 app = Flask(__name__)
-# CORS(app)
+CORS(app)
 # Setup SQLAlchemy object and properties for the database (db)
 # basedir = os.path.abspath(os.path.dirname(__file__))
 ## dbURI = 'sqlite:///' + os.path.join(basedir, '/volumes/sqlite.db')
