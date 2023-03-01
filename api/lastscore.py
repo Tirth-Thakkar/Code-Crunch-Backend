@@ -5,22 +5,17 @@ from datetime import datetime
 import json 
 import datetime
 
-from __init__ import app, db
-
-from flask_cors import cross_origin
-# CORS(app)
-
-
+from __init__ import db
 
 from model.users import User
 from model.scores import Scores
+
 score_api = Blueprint('score_api', __name__,
                    url_prefix='/api/lastscore')
 
 # API docs https://flask-restful.readthedocs.io/en/latest/api.html
 api = Api(score_api)
 
-@cross_origin(origin='*', headers=['Content-Type'])
 class ScoresAPI:       
     class _Score(Resource):
         def post(self):

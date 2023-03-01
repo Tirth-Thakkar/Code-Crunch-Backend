@@ -16,23 +16,23 @@ from model.scores import initScores
 # setup APIs
 from api.covid import covid_api # Blueprint import api definition
 from api.joke import joke_api # Blueprint import api definition
+from api.lastscore import score_api
 from api.user import user_api # Blueprint import api definition
 from api.leader import leader_api # Blueprint import api definition
 from api.profile import profile_api # Blueprint import api definition
 # from api.highscore import highscore_api # Blueprint import api definition
-from api.lastscore import score_api
 # setup App pages
 from projects.projects import app_projects # Blueprint directory import projects definition
 
 # register URIs
 app.register_blueprint(joke_api) # register api routes
 app.register_blueprint(covid_api) # register api routes
+app.register_blueprint(score_api)
 app.register_blueprint(user_api) # register api routes
 app.register_blueprint(leader_api) # register api routes
 app.register_blueprint(profile_api) # register api routes
 # app.register_blueprint(highscore_api) # register api routes
 app.register_blueprint(app_projects) # register app pages
-app.register_blueprint(score_api)
 
 @app.errorhandler(404)  # catch for URL not found
 def page_not_found(e):
