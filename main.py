@@ -19,7 +19,7 @@ from api.user import user_api # Blueprint import api definition
 from api.leader import leader_api # Blueprint import api definition
 from api.profile import profile_api # Blueprint import api definition
 # from api.highscore import highscore_api # Blueprint import api definition
-from api.lastscore import score_api
+# from api.lastscore import score_api
 # setup App pages
 from projects.projects import app_projects # Blueprint directory import projects definition
 
@@ -31,7 +31,7 @@ app.register_blueprint(leader_api) # register api routes
 app.register_blueprint(profile_api) # register api routes
 # app.register_blueprint(highscore_api) # register api routes
 app.register_blueprint(app_projects) # register app pages
-app.register_blueprint(score_api)
+# app.register_blueprint(score_api)
 
 @app.errorhandler(404)  # catch for URL not found
 def page_not_found(e):
@@ -48,20 +48,20 @@ def stub():
 
 @app.before_first_request
 def activate_job():
-    print("activating file")
-    db.init_app(app)
+    # print("activating file")
+    # db.init_app(app)
     initJokes()
     initUsers()
     initLeaders()
     initProfiles()
     initScores()
-#    initHighscores()
+    # initHighscores()
 
-activate_job()
+# activate_job()
 # this runs the application on the development server
 if __name__ == "__main__":
     # change name for testing
     print("making server from main.py")
     from flask_cors import CORS
     cors = CORS(app)
-    app.run(debug=True, host="0.0.0.0", port="8086")
+    app.run(debug=True, host="0.0.0.0", port="8080")
