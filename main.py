@@ -58,8 +58,8 @@ def activate_job():
     initScores()
     # initHighscores()
 
-from flask_cors import CORS
-cors = CORS(app)
+# from flask_cors import CORS
+# CORS(app)
 
 # activate_job()
 # this runs the application on the development server

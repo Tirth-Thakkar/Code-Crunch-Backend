@@ -7,6 +7,9 @@ import datetime
 
 from __init__ import app, db
 
+from flask_cors import CORS
+CORS(app)
+
 from model.users import User
 from model.scores import Scores
 score_api = Blueprint('score_api', __name__,
