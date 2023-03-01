@@ -12,7 +12,7 @@ These object can be used throughout project.
 
 # Setup of key Flask object (app)
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://sreejagangapuram.github.io"}})
 # Setup SQLAlchemy object and properties for the database (db)
 # basedir = os.path.abspath(os.path.dirname(__file__))
 ## dbURI = 'sqlite:///' + os.path.join(basedir, '/volumes/sqlite.db')
