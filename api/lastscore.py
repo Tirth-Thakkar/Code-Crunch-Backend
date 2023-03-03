@@ -51,7 +51,10 @@ class ScoresAPI:
         def get(self):
             body = request.get_json()
             name = body.get('username')
-            user = Scores.query.filter((User.username == name)).first()
+            # user = Scores.query.filter((User.username == name)).first()
+            scores = Scores.query.filter_by(_username=str(name)).first()
+            print(scores)
+            return scores
             if name == 'null':
                 return {'message': f'error no login'}, 210
             # Query the table, filter by age, order by name, and print each record
