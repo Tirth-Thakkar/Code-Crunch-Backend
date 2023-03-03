@@ -58,7 +58,7 @@ class ScoresAPI:
             if name == 'null':
                 return {'message': f'error no login'}, 210
             # Query the table, filter by age, order by name, and print each record
-            rows = db.session.query(Scores).all()
+            # rows = db.session.query(Scores).all()
                 # Convert the list of model objects to a list of dictionaries
             data = []
             for row in rows:
