@@ -32,8 +32,8 @@ class ScoresAPI:
                 db.session.commit()
                 return {'message': f'Add new user'}, 210
             if int(score) is False or int(score) <= 0:
-                return {'message': f'error no score'}, 210            
-            #Scores.query.filter_by(username='ekam').update({Scores.score1: 25})
+                return {'message': f'error no score'}, 210       
+        #Scores.query.filter_by(username='ekam').update({Scores.score1: 25})
             Scores.query.filter_by(_username=str(name)).update({Scores._score6: Scores._score5})
             Scores.query.filter_by(_username=str(name)).update({Scores._score5: Scores._score4})
             Scores.query.filter_by(_username=str(name)).update({Scores._score4: Scores._score3})
@@ -45,7 +45,7 @@ class ScoresAPI:
             #if user:
             #    return jsonify(score.read())
             # failure returns error
-            #return {'message': f'Processed {username}, either a format error or score {score} is negative or zero'}, 210
+            return {'message': f'Processed {name} with score {score}'}, 210
 
     class _Retrieve(Resource):
         def get(self):
