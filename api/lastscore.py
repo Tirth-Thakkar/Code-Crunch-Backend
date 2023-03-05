@@ -48,24 +48,40 @@ class ScoresAPI:
             return {'message': f'Processed {name} with score {score}'}, 210
 
     class _Retrieve(Resource):
-        def get(self):
+        def post(self):
             body = request.get_json()
             name = body.get('username')
-            # user = Scores.query.filter((User.username == name)).first()
+            print (name)
             scores = Scores.query.filter_by(_username=str(name)).first()
-            print(scores)
-            return scores
             if name == 'null':
                 return {'message': f'error no login'}, 210
-            # Query the table, filter by age, order by name, and print each record
-            # rows = db.session.query(Scores).all()
-                # Convert the list of model objects to a list of dictionaries
-            data = []
-            for row in rows:
-                row_dict = row.__dict__
-                del row_dict['_sa_instance_state']
-                data.append(row_dict)
-            return jsonify(data)
+
+            return jsonify({'score1':scores.score1,
+                            'score2':scores.score2,
+                            'score3':scores.score3,
+                            'score4':scores.score4,
+                            'score5':scores.score5,
+                            'score6':scores.score6})
+            
+        # def post(self):
+        #     body = request.get_json()
+        #     name = body.get('username')
+        #     # user = Scores.query.filter((User.username == name)).first()
+        #     # scores = Scores.query.filter_by(_username=str(name)).first()
+        #     print(name)
+        #     #return scores
+        #     if name == 'null':
+        #         return {'message': f'error no login'}, 210
+        #     # Query the table, filter by age, order by name, and print each record
+        #     rows = db.session.query(Scores).all()
+        #         # Convert the list of model objects to a list of dictionaries
+        #     data = []
+        #     for row in rows:
+        #         row_dict = row.__dict__
+        #         del row_dict['_sa_instance_state']
+        #         if row_dict['_username'] == name :
+        #             data.append(row_dict)
+        #     return jsonify(data)
             
             ##records = Scores.query.filter_by(_username=str(name)).order_by(Scores.name).all()
             #msg = ""
